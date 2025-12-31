@@ -3,8 +3,8 @@
   "buildDate": "12/5/2025, 7:48:29 PM",
   "environment": "Production",
   "vite": {
-    "vitePath": "/Mines-Demo/",
-    "localVitePath": "/Mines-Demo/",
-    "exportVitePath": "/_Games/mine_crash/"
+    "vitePath": "/Plinko-Web/",
+    "localVitePath": "/Plinko-Web/",
+    "exportVitePath": "/Plinko-Web/"
   }
 }
