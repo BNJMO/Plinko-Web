@@ -1124,6 +1124,7 @@ export async function createGame(mount, opts = {}) {
   let boxHeight = 0;
   let gridStartY = 0;
   let gridWidth = 0;
+  let gridOffsetX = 0;
   let historyPanelWidth = 0;
   let historyPanelX = 0;
   let historyPanelY = 0;
@@ -1178,22 +1179,20 @@ function calculateLayout() {
 
   const maxPegsInRow = rows + 1;
 
-  gridStartY =
-    gameHeight * (layout.gridStartYScale ?? 0.055) +
-    (layout.gridStartYOffset ?? 0);
+  const gridSize = Math.min(gameWidth, gameHeight);
+  gridWidth = gridSize;
+  gridOffsetX = (gameWidth - gridWidth) / 2;
+  gridStartY = (gameHeight - gridSize) / 2;
 
-  gridWidth = gameWidth;
+  const usableH = gridSize;
 
-  const bottomReserve = gameHeight * 0.14;
-  const usableH = gameHeight - gridStartY - bottomReserve;
-
-  pegSpacingX = (gameWidth * 0.9) / maxPegsInRow;
+  pegSpacingX = (gridWidth * 0.9) / maxPegsInRow;
   pegSpacingY = (usableH * 0.92) / (rows + 1);
 
   pegRadius = Math.min(pegSpacingX, pegSpacingY) * THEME.pegRadiusScale;
   ballRadius = pegRadius * THEME.ballRadiusScale;
 
-    historyPanelX = 0;
+  historyPanelX = 0;
 
   historyPanelY = gridStartY + (layout.historyOffsetY ?? 0);
 
@@ -1213,6 +1212,11 @@ function calculateLayout() {
     (layout.boardOffsetY ?? 0) +
       (smallScreen ? (layout.mobileBoardOffsetY ?? 0) : 0)
   );
+
+  boardContainer.x = gridOffsetX;
+  effectsContainer.x = gridOffsetX;
+  ballContainer.x = gridOffsetX;
+  uiContainer.x = gridOffsetX;
 }
 
 
