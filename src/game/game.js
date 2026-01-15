@@ -1154,10 +1154,7 @@ export async function createGame(mount, opts = {}) {
     pegOffsetX = getPegOffsetXForRows(rows);
 
     historyPanelWidth = Math.min(110, containerWidth * 0.16);
-    const playAreaWidth = Math.max(
-      1,
-      containerWidth - historyPanelWidth - historyGap - leftPadding - rightPadding
-    );
+    const playAreaWidth = Math.max(1, containerWidth - leftPadding - rightPadding);
 
     gameWidth = playAreaWidth;
     gameHeight = containerHeight;
@@ -1178,7 +1175,8 @@ export async function createGame(mount, opts = {}) {
     pegRadius = Math.min(pegSpacingX, pegSpacingY) * THEME.pegRadiusScale;
     ballRadius = pegRadius * THEME.ballRadiusScale;
 
-    historyPanelX = gridWidth + historyGap + (layout.historyOffsetX ?? 0);
+    historyPanelX =
+      gridWidth - historyPanelWidth - historyGap + (layout.historyOffsetX ?? 0);
     historyPanelY = gridStartY + (layout.historyOffsetY ?? 0);
 
     lastRowY = gridStartY + rows * pegSpacingY;
